@@ -25,6 +25,27 @@ app.get("/api/employees", async (req, res, next) => {
   });
 });
 
+app.post("/api/employees", async (req, res, next) => {
+  if (
+    typeof req.body.firstName != "string" ||
+    typeof req.body.lastName != "string" ||
+    typeof req.body.salary != "number"
+  ) {
+    return res.status(422).json({
+      error:
+        "invalid arguments for firstName, lastName, or salary, make sure they are the correct type",
+    });
+  }
+
+  const employee = await Employee.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    salary: req.body.salary,
+  });
+
+  return res.json(employee);
+});
+
 const PORT = 5000;
 app.listen(PORT, (err) => {
   if (err) console.log(err);
