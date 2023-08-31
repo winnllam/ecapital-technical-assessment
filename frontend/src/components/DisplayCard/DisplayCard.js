@@ -14,32 +14,43 @@ const DisplayCard = () => {
     });
   };
 
+  const deleteEmployee = (id) => {
+    employeeService.deleteEmployee(id).then(() => {
+      fetchEmployeeData();
+    });
+  };
+
   useEffect(() => {
     fetchEmployeeData();
   }, []);
 
   return (
-    <div>
+    <Container>
+      <Row>
+        <Col>First Name</Col>
+        <Col>Last Name</Col>
+        <Col>Salary</Col>
+        <Col></Col>
+      </Row>
+      <hr></hr>
       {employees.length > 0 && (
-        <Container>
-          <Row>
-            <Col>First Name</Col>
-            <Col>Last Name</Col>
-            <Col>Salary</Col>
-            <Col></Col>
-          </Row>
-          <hr></hr>
+        <div>
           {employees.map((employee) => (
             <Row key={employee.id}>
               <Col>{employee.firstName}</Col>
               <Col>{employee.lastName}</Col>
               <Col>{employee.salary}</Col>
-              <Col>Edit/Delete</Col>
+              <Col>
+                <div className={displayCardStyles.editDelete}>
+                  <p>Edit</p>
+                  <p onClick={() => deleteEmployee(employee.id)}>Delete</p>
+                </div>
+              </Col>
             </Row>
           ))}
-        </Container>
+        </div>
       )}
-    </div>
+    </Container>
   );
 };
 
