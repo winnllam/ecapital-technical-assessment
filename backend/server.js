@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import { sequelize } from "./datasource.js";
 import { Employee } from "./models/employee.js";
 
@@ -14,6 +15,12 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+const corsOptions = {
+  origin: ["http://localhost:3000"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.get("/api/employees", async (req, res, next) => {
   const length = await Employee.count();
