@@ -46,6 +46,22 @@ app.post("/api/employees", async (req, res, next) => {
   return res.json(employee);
 });
 
+app.patch("/api/employees/:id", async (req, res, next) => {
+  const employee = await Employee.findByPk(req.params.id);
+  if (employee === null) {
+    return res
+      .status(404)
+      .json({ error: "employee id:" + req.params.id + " does not exists" });
+  }
+
+  employee.firstName = req.body.firstName;
+  employee.lastName = req.body.lastName;
+  employee.salary = req.body.salary;
+
+  employee.save();
+  return res.json(employee);
+});
+
 app.delete("/api/employees/:id", async (req, res, next) => {
   const employee = await Employee.findByPk(req.params.id);
   if (!employee) {
