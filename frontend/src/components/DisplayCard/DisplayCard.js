@@ -20,6 +20,10 @@ const DisplayCard = () => {
     });
   };
 
+  const currencyFormat = (num) => {
+    return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
   useEffect(() => {
     fetchEmployeeData();
   }, []);
@@ -39,7 +43,7 @@ const DisplayCard = () => {
             <Row key={employee.id}>
               <Col>{employee.firstName}</Col>
               <Col>{employee.lastName}</Col>
-              <Col>{employee.salary}</Col>
+              <Col>{currencyFormat(employee.salary)}</Col>
               <Col>
                 <div className={displayCardStyles.editDelete}>
                   <p>Edit</p>
