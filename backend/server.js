@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { sequelize } from "./datasource.js";
+import { Employee } from "./models/employee.js";
 
 export const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,6 +14,16 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+app.get("/api/employees", async (req, res, next) => {
+  const length = await Employee.count();
+  const employees = await Employee.findAll();
+
+  return res.json({
+    total: length,
+    employees: employees,
+  });
+});
 
 const PORT = 5000;
 app.listen(PORT, (err) => {
