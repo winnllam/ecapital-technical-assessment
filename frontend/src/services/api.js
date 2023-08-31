@@ -1,4 +1,4 @@
-import { get, post, patch, destory } from "./base.js";
+import { get, post, patch, destroy } from "./base.js";
 
 const URL = "/employees";
 
@@ -28,5 +28,5 @@ export const updateEmployee = function (
 };
 
 export const deleteEmployee = function (employeeId) {
-  return destory(URL + `/${employeeId}`);
+  return destroy(URL + `/${employeeId}`);
 };
