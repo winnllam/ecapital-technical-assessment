@@ -46,6 +46,18 @@ app.post("/api/employees", async (req, res, next) => {
   return res.json(employee);
 });
 
+app.delete("/api/employees/:id", async (req, res, next) => {
+  const employee = await Employee.findByPk(req.params.id);
+  if (!employee) {
+    return res
+      .status(404)
+      .json({ error: "employee id:" + req.params.id + " does not exists" });
+  }
+
+  await employee.destroy();
+  return res.json(employee);
+});
+
 const PORT = 5000;
 app.listen(PORT, (err) => {
   if (err) console.log(err);
