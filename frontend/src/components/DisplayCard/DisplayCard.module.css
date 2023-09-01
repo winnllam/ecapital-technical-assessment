@@ -1,8 +1,8 @@
 .displayCard {
   width: 800px;
-  border: 1px solid grey;
   border-radius: 15px;
   padding: 30px;
+  box-shadow: 20px 20px 60px #cccccc, -20px -20px 60px #f4f4f4;
 }
 
 .header {
