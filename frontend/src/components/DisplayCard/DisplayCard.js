@@ -29,32 +29,46 @@ const DisplayCard = () => {
   }, []);
 
   return (
-    <Container>
-      <Row>
-        <Col>First Name</Col>
-        <Col>Last Name</Col>
-        <Col>Salary</Col>
-        <Col></Col>
-      </Row>
-      <hr></hr>
-      {employees.length > 0 && (
-        <div>
-          {employees.map((employee) => (
-            <Row key={employee.id}>
-              <Col>{employee.firstName}</Col>
-              <Col>{employee.lastName}</Col>
-              <Col>{currencyFormat(employee.salary)}</Col>
-              <Col>
-                <div className={displayCardStyles.editDelete}>
-                  <p>Edit</p>
-                  <p onClick={() => deleteEmployee(employee.id)}>Delete</p>
-                </div>
-              </Col>
-            </Row>
-          ))}
-        </div>
-      )}
-    </Container>
+    <div className={displayCardStyles.displayCard}>
+      <Container>
+        <h3 className={displayCardStyles.header}>Employees</h3>
+        <Row>
+          <Col>
+            <b>First Name</b>
+          </Col>
+          <Col>
+            <b>Last Name</b>
+          </Col>
+          <Col>
+            <b>Salary</b>
+          </Col>
+          <Col></Col>
+        </Row>
+        <hr></hr>
+        {employees.length > 0 && (
+          <div>
+            {employees.map((employee) => (
+              <Row key={employee.id}>
+                <Col>{employee.firstName}</Col>
+                <Col>{employee.lastName}</Col>
+                <Col>{currencyFormat(employee.salary)}</Col>
+                <Col>
+                  <div className={displayCardStyles.editDelete}>
+                    <p className={displayCardStyles.edit}>Edit</p>
+                    <p
+                      onClick={() => deleteEmployee(employee.id)}
+                      className={displayCardStyles.delete}
+                    >
+                      Delete
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+            ))}
+          </div>
+        )}
+      </Container>
+    </div>
   );
 };
 

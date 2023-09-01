@@ -1,4 +1,25 @@
+.displayCard {
+  width: 50%;
+  border: 1px solid grey;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
 .editDelete {
   display: flex;
   justify-content: space-between;
+}
+
+.edit {
+  cursor: pointer;
+  color: orange;
+}
+
+.delete {
+  cursor: pointer;
+  color: red;
 }
