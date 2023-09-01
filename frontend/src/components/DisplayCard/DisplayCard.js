@@ -6,10 +6,17 @@ import Button from "react-bootstrap/Button";
 import displayCardStyles from "./DisplayCard.module.css";
 import * as employeeService from "../../services/api.js";
 import FormModal from "../FormModal/FormModal";
+import Update from "../FormModal/Update";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+
+  const [id, setId] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [salary, setSalary] = useState(0);
 
   const fetchEmployeeData = () => {
     employeeService.getAllEmployees().then((res) => {
@@ -23,13 +30,33 @@ const DisplayCard = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isNaN(salary)) {
+      employeeService
+        .updateEmployee(id, firstName, lastName, salary)
+        .then(() => {
+          fetchEmployeeData();
+        });
+    } else {
+      alert("Please enter a number for salary!");
+    }
+  };
+
   const currencyFormat = (num) => {
     return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
 
   useEffect(() => {
     fetchEmployeeData();
-  }, []);
+
+    if (editingUser) {
+      setId(editingUser.id);
+      setFirstName(editingUser.firstName);
+      setLastName(editingUser.lastName);
+      setSalary(editingUser.salary);
+    }
+  }, [editingUser]);
 
   return (
     <div className={displayCardStyles.displayCard}>
@@ -57,7 +84,12 @@ const DisplayCard = () => {
                 <Col>{currencyFormat(employee.salary)}</Col>
                 <Col>
                   <div className={displayCardStyles.editDelete}>
-                    <p className={displayCardStyles.edit}>Edit</p>
+                    <p
+                      onClick={() => setEditingUser(employee)}
+                      className={displayCardStyles.edit}
+                    >
+                      Edit
+                    </p>
                     <p
                       onClick={() => deleteEmployee(employee.id)}
                       className={displayCardStyles.delete}
@@ -80,6 +112,16 @@ const DisplayCard = () => {
           lastName=""
           salary=""
         />
+
+        <Update
+          handleSubmit={handleSubmit}
+          firstName={firstName}
+          setFirstName={setFirstName}
+          lastName={lastName}
+          setLastName={setLastName}
+          salary={salary}
+          setSalary={setSalary}
+        ></Update>
       </Container>
     </div>
   );
