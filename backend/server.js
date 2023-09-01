@@ -63,6 +63,19 @@ app.patch("/api/employees/:id", async (req, res, next) => {
       .json({ error: "employee id:" + req.params.id + " does not exists" });
   }
 
+  if (
+    typeof req.body.firstName != "string" ||
+    req.body.firstName.length == 0 ||
+    typeof req.body.lastName != "string" ||
+    req.body.lastName.length == 0 ||
+    typeof req.body.salary != "number"
+  ) {
+    return res.status(422).json({
+      error:
+        "invalid arguments for firstName, lastName, or salary, make sure they are the correct type",
+    });
+  }
+
   employee.firstName = req.body.firstName;
   employee.lastName = req.body.lastName;
   employee.salary = req.body.salary;
