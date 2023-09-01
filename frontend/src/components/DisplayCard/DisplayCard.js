@@ -108,7 +108,7 @@ const DisplayCard = () => {
         </Row>
         <hr></hr>
         {employees.length > 0 && (
-          <div>
+          <div className={displayCardStyles.employeeList}>
             {employees.map((employee) => (
               <Row key={employee.id}>
                 <Col>{employee.firstName}</Col>
