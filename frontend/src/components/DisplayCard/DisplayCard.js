@@ -61,6 +61,12 @@ const DisplayCard = () => {
     setShowEditModal(true);
   };
 
+  const closeModal = () => {
+    setShowCreateModal(false);
+    setShowEditModal(false);
+    resetInput();
+  };
+
   const currencyFormat = (num) => {
     return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
@@ -70,7 +76,7 @@ const DisplayCard = () => {
     setId(0);
     setFirstName("");
     setLastName("");
-    setSalary(0);
+    setSalary("");
   };
 
   useEffect(() => {
@@ -142,7 +148,7 @@ const DisplayCard = () => {
 
         <FormModal
           show={showCreateModal}
-          close={() => setShowCreateModal(false)}
+          close={() => closeModal()}
           action="Add"
           handleSubmit={createEmployee}
           firstName={firstName}
@@ -155,7 +161,7 @@ const DisplayCard = () => {
 
         <FormModal
           show={showEditModal}
-          close={() => setShowEditModal(false)}
+          close={() => closeModal()}
           action="Edit"
           handleSubmit={updateEmployee}
           firstName={firstName}
