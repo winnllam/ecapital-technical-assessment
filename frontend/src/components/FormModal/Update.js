@@ -1,4 +1,10 @@
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+
 const Update = ({
+  show,
+  close,
   handleSubmit,
   firstName,
   setFirstName,
@@ -8,33 +14,54 @@ const Update = ({
   setSalary,
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name:</label>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Last Name:</label>
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Salary:</label>
-        <input
-          type="text"
-          value={salary}
-          onChange={(e) => setSalary(e.target.value)}
-        />
-      </div>
-      <button type="submit">Update Employee</button>
-    </form>
+    <Modal show={show} centered>
+      <Modal.Header>
+        <Modal.Title>Add Employee</Modal.Title>
+      </Modal.Header>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="ex. Jane"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="ex. Doe"
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="salary"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              placeholder="ex. 80000"
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={close}>
+            Close
+          </Button>
+          <Button variant="primary" type="submit">
+            Add Employee
+          </Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
   );
 };
 

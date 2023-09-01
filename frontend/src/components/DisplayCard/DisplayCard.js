@@ -10,7 +10,7 @@ import Update from "../FormModal/Update";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
 
   const [id, setId] = useState(0);
@@ -30,12 +30,14 @@ const DisplayCard = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const updateEmployee = (e) => {
     e.preventDefault();
     if (!isNaN(salary)) {
       employeeService
         .updateEmployee(id, firstName, lastName, salary)
         .then(() => {
+          resetInput();
+          setShowModal(false);
           fetchEmployeeData();
         });
     } else {
@@ -43,8 +45,21 @@ const DisplayCard = () => {
     }
   };
 
+  const editEmployee = (employee) => {
+    setEditingUser(employee);
+    setShowModal(true);
+  };
+
   const currencyFormat = (num) => {
     return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
+  const resetInput = () => {
+    setEditingUser(null);
+    setId(0);
+    setFirstName("");
+    setLastName("");
+    setSalary(0);
   };
 
   useEffect(() => {
@@ -85,7 +100,7 @@ const DisplayCard = () => {
                 <Col>
                   <div className={displayCardStyles.editDelete}>
                     <p
-                      onClick={() => setEditingUser(employee)}
+                      onClick={() => editEmployee(employee)}
                       className={displayCardStyles.edit}
                     >
                       Edit
@@ -102,19 +117,14 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
-        <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+        <Button variant="primary" onClick={() => setShowModal(true)}>
           Add Employee
         </Button>
-        <FormModal
-          show={showCreateModal}
-          close={() => setShowCreateModal(false)}
-          firstName=""
-          lastName=""
-          salary=""
-        />
 
         <Update
-          handleSubmit={handleSubmit}
+          show={showModal}
+          close={() => setShowModal(false)}
+          handleSubmit={updateEmployee}
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}
