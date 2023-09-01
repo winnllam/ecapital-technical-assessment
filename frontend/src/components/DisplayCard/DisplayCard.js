@@ -5,11 +5,11 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import displayCardStyles from "./DisplayCard.module.css";
 import * as employeeService from "../../services/api.js";
-import CreateModal from "../CreateModal/CreateModal";
+import FormModal from "../FormModal/FormModal";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const fetchEmployeeData = () => {
     employeeService.getAllEmployees().then((res) => {
@@ -70,10 +70,16 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
-        <Button variant="primary" onClick={() => setShowModal(true)}>
+        <Button variant="primary" onClick={() => setShowEditModal(true)}>
           Add Employee
         </Button>
-        <CreateModal show={showModal} close={() => setShowModal(false)} />
+        <FormModal
+          show={showEditModal}
+          close={() => setShowEditModal(false)}
+          firstName=""
+          lastName=""
+          salary=""
+        />
       </Container>
     </div>
   );

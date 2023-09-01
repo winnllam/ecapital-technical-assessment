@@ -4,8 +4,12 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import * as employeeService from "../../services/api.js";
 
-const CreateModal = (props) => {
-  const initialFormState = { firstName: "", lastName: "", salary: "" };
+const FormModal = (props) => {
+  const initialFormState = {
+    firstName: props.firstName,
+    lastName: props.lastName,
+    salary: props.salary,
+  };
   const [employee, setEmployee] = useState(initialFormState);
 
   const handleInputChange = (e) => {
@@ -80,4 +84,4 @@ const CreateModal = (props) => {
   );
 };
 
-export default CreateModal;
+export default FormModal;
