@@ -16,7 +16,7 @@ const DisplayCard = () => {
   const [id, setId] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState("");
 
   const fetchEmployeeData = () => {
     employeeService.getAllEmployees().then((res) => {
@@ -33,30 +33,27 @@ const DisplayCard = () => {
   const createEmployee = (e) => {
     e.preventDefault();
     let salaryParse = parseInt(salary);
-    if (!isNaN(salaryParse)) {
-      employeeService.addEmployee(firstName, lastName, salaryParse).then(() => {
+    employeeService
+      .addEmployee(firstName, lastName, salaryParse)
+      .then(() => {
         resetInput();
         setShowCreateModal(false);
         fetchEmployeeData();
-      });
-    } else {
-      alert("Please enter a number for salary!");
-    }
+      })
+      .catch((error) => alert("Please enter correct values!"));
   };
 
   const updateEmployee = (e) => {
     e.preventDefault();
-    if (!isNaN(salary)) {
-      employeeService
-        .updateEmployee(id, firstName, lastName, salary)
-        .then(() => {
-          resetInput();
-          setShowEditModal(false);
-          fetchEmployeeData();
-        });
-    } else {
-      alert("Please enter a number for salary!");
-    }
+    let salaryParse = parseInt(salary);
+    employeeService
+      .updateEmployee(id, firstName, lastName, salaryParse)
+      .then(() => {
+        resetInput();
+        setShowEditModal(false);
+        fetchEmployeeData();
+      })
+      .catch((error) => alert("Please enter correct values!"));
   };
 
   const editEmployee = (employee) => {
