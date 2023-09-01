@@ -10,7 +10,8 @@ import Update from "../FormModal/Update";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
 
   const [id, setId] = useState(0);
@@ -37,7 +38,7 @@ const DisplayCard = () => {
         .updateEmployee(id, firstName, lastName, salary)
         .then(() => {
           resetInput();
-          setShowModal(false);
+          setShowEditModal(false);
           fetchEmployeeData();
         });
     } else {
@@ -47,7 +48,7 @@ const DisplayCard = () => {
 
   const editEmployee = (employee) => {
     setEditingUser(employee);
-    setShowModal(true);
+    setShowEditModal(true);
   };
 
   const currencyFormat = (num) => {
@@ -117,13 +118,13 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
-        <Button variant="primary" onClick={() => setShowModal(true)}>
+        <Button variant="primary" onClick={() => setShowCreateModal(true)}>
           Add Employee
         </Button>
 
         <Update
-          show={showModal}
-          close={() => setShowModal(false)}
+          show={showEditModal}
+          close={() => setShowEditModal(false)}
           handleSubmit={updateEmployee}
           firstName={firstName}
           setFirstName={setFirstName}
