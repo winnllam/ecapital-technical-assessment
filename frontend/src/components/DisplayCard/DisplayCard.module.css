@@ -1,5 +1,5 @@
 .displayCard {
-  width: 50%;
+  width: 800px;
   border: 1px solid grey;
   border-radius: 15px;
   padding: 30px;
@@ -14,14 +14,24 @@
   justify-content: space-between;
 }
 
-.edit {
-  cursor: pointer;
-  color: orange;
+.editButton {
+  border: rgb(214, 169, 84);
+  background-color: rgb(214, 169, 84);
+  margin-bottom: 10px;
 }
 
-.delete {
-  cursor: pointer;
-  color: red;
+.editButton:hover {
+  background-color: rgb(170, 134, 67);
+}
+
+.deleteButton {
+  border: rgb(187, 81, 81);
+  background-color: rgb(187, 81, 81);
+  margin-bottom: 10px;
+}
+
+.deleteButton:hover {
+  background-color: rgb(131, 58, 58);
 }
 
 .button {
@@ -31,6 +41,5 @@
 }
 
 .button:hover {
-  border: rgb(158, 224, 202);
-  background-color: rgb(158, 224, 202);
+  background-color: rgb(91, 128, 115);
 }

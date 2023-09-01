@@ -112,20 +112,24 @@ const DisplayCard = () => {
                 <Col>{employee.lastName}</Col>
                 <Col>{currencyFormat(employee.salary)}</Col>
                 <Col>
-                  <div className={displayCardStyles.editDelete}>
-                    <p
-                      onClick={() => editEmployee(employee)}
-                      className={displayCardStyles.edit}
-                    >
-                      Edit
-                    </p>
-                    <p
-                      onClick={() => deleteEmployee(employee.id)}
-                      className={displayCardStyles.delete}
-                    >
-                      Delete
-                    </p>
-                  </div>
+                  <Row>
+                    <Col>
+                      <Button
+                        onClick={() => editEmployee(employee)}
+                        className={displayCardStyles.editButton}
+                      >
+                        Edit
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        onClick={() => deleteEmployee(employee.id)}
+                        className={displayCardStyles.deleteButton}
+                      >
+                        Delete
+                      </Button>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             ))}
