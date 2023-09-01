@@ -11,7 +11,7 @@ const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [editingUser, setEditingUser] = useState(null);
+  const [editingEmp, setEditingEmp] = useState(null);
 
   const [id, setId] = useState(0);
   const [firstName, setFirstName] = useState("");
@@ -57,7 +57,7 @@ const DisplayCard = () => {
   };
 
   const editEmployee = (employee) => {
-    setEditingUser(employee);
+    setEditingEmp(employee);
     setShowEditModal(true);
   };
 
@@ -72,7 +72,7 @@ const DisplayCard = () => {
   };
 
   const resetInput = () => {
-    setEditingUser(null);
+    setEditingEmp(null);
     setId(0);
     setFirstName("");
     setLastName("");
@@ -82,13 +82,13 @@ const DisplayCard = () => {
   useEffect(() => {
     fetchEmployeeData();
 
-    if (editingUser) {
-      setId(editingUser.id);
-      setFirstName(editingUser.firstName);
-      setLastName(editingUser.lastName);
-      setSalary(editingUser.salary);
+    if (editingEmp) {
+      setId(editingEmp.id);
+      setFirstName(editingEmp.firstName);
+      setLastName(editingEmp.lastName);
+      setSalary(editingEmp.salary);
     }
-  }, [editingUser]);
+  }, [editingEmp]);
 
   return (
     <div className={displayCardStyles.displayCard}>
