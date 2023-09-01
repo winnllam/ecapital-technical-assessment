@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 const FormModal = ({
   show,
   close,
+  action,
   handleSubmit,
   firstName,
   setFirstName,
@@ -16,7 +17,7 @@ const FormModal = ({
   return (
     <Modal show={show} centered>
       <Modal.Header>
-        <Modal.Title>Add Employee</Modal.Title>
+        <Modal.Title>{action} Employee</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
@@ -57,7 +58,7 @@ const FormModal = ({
             Close
           </Button>
           <Button variant="primary" type="submit">
-            Add Employee
+            {action} Employee
           </Button>
         </Modal.Footer>
       </Form>

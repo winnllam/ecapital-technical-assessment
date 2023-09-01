@@ -138,6 +138,7 @@ const DisplayCard = () => {
         <FormModal
           show={showCreateModal}
           close={() => setShowCreateModal(false)}
+          action="Add"
           handleSubmit={createEmployee}
           firstName={firstName}
           setFirstName={setFirstName}
@@ -150,6 +151,7 @@ const DisplayCard = () => {
         <FormModal
           show={showEditModal}
           close={() => setShowEditModal(false)}
+          action="Edit"
           handleSubmit={updateEmployee}
           firstName={firstName}
           setFirstName={setFirstName}
