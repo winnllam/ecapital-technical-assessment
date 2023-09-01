@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import displayCardStyles from "./DisplayCard.module.css";
 import * as employeeService from "../../services/api.js";
 import FormModal from "../FormModal/FormModal";
-import Update from "../FormModal/Update";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
@@ -29,6 +28,20 @@ const DisplayCard = () => {
     employeeService.deleteEmployee(id).then(() => {
       fetchEmployeeData();
     });
+  };
+
+  const createEmployee = (e) => {
+    e.preventDefault();
+    let salaryParse = parseInt(salary);
+    if (!isNaN(salaryParse)) {
+      employeeService.addEmployee(firstName, lastName, salaryParse).then(() => {
+        resetInput();
+        setShowCreateModal(false);
+        fetchEmployeeData();
+      });
+    } else {
+      alert("Please enter a number for salary!");
+    }
   };
 
   const updateEmployee = (e) => {
@@ -122,7 +135,19 @@ const DisplayCard = () => {
           Add Employee
         </Button>
 
-        <Update
+        <FormModal
+          show={showCreateModal}
+          close={() => setShowCreateModal(false)}
+          handleSubmit={createEmployee}
+          firstName={firstName}
+          setFirstName={setFirstName}
+          lastName={lastName}
+          setLastName={setLastName}
+          salary={salary}
+          setSalary={setSalary}
+        ></FormModal>
+
+        <FormModal
           show={showEditModal}
           close={() => setShowEditModal(false)}
           handleSubmit={updateEmployee}
@@ -132,7 +157,7 @@ const DisplayCard = () => {
           setLastName={setLastName}
           salary={salary}
           setSalary={setSalary}
-        ></Update>
+        ></FormModal>
       </Container>
     </div>
   );

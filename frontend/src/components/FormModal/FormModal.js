@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-const Update = ({
+const FormModal = ({
   show,
   close,
   handleSubmit,
@@ -42,7 +42,7 @@ const Update = ({
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label>Salary</Form.Label>
             <Form.Control
               type="text"
               name="salary"
@@ -65,4 +65,4 @@ const Update = ({
   );
 };
 
-export default Update;
+export default FormModal;
