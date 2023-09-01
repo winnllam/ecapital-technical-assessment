@@ -1,17 +1,31 @@
 import express from "express";
 import bodyParser from "body-parser";
+import fs from "fs";
 import cors from "cors";
 import { sequelize } from "./datasource.js";
 import { Employee } from "./models/employee.js";
+import jsonData from "../data.json" assert { type: "json" };
 
 export const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 try {
+  const isDatabaseExists = fs.existsSync("employees.sqlite");
+
   await sequelize.authenticate();
   await sequelize.sync({ alter: { drop: false } });
   console.log("Connection has been established successfully.");
+
+  if (!isDatabaseExists) {
+    jsonData.employees.forEach((row) => {
+      Employee.create({
+        firstName: row.firstName,
+        lastName: row.lastName,
+        salary: row.salary,
+      });
+    });
+  }
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
