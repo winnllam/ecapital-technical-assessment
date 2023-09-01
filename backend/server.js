@@ -37,8 +37,15 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get("/api/employees", async (req, res, next) => {
+  const page = parseInt(req.query.page ?? 0);
+  const limit = parseInt(req.query.limit ?? 10);
+
   const length = await Employee.count();
-  const employees = await Employee.findAll();
+  const employees = await Employee.findAll({
+    order: [["id", "DESC"]],
+    offset: page * limit,
+    limit: limit,
+  });
 
   return res.json({
     total: length,

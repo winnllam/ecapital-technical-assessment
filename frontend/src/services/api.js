@@ -2,8 +2,8 @@ import { get, post, patch, destroy } from "./base.js";
 
 const URL = "/employees";
 
-export const getAllEmployees = function () {
-  return get(URL).then((res) => res.data);
+export const getAllEmployees = function (page = 0, limit = 100) {
+  return get(URL + `?page=${page}&limit=${limit}`).then((res) => res.data);
 };
 
 export const addEmployee = function (firstName, lastName, salary) {
