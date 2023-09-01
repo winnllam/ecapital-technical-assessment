@@ -131,7 +131,10 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
-        <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+        <Button
+          className={displayCardStyles.button}
+          onClick={() => setShowCreateModal(true)}
+        >
           Add Employee
         </Button>
 

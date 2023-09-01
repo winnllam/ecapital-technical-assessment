@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import formModalStyles from "./FormModal.module.css";
 
 const FormModal = ({
   show,
@@ -57,7 +58,7 @@ const FormModal = ({
           <Button variant="secondary" onClick={close}>
             Close
           </Button>
-          <Button variant="primary" type="submit">
+          <Button className={formModalStyles.button} type="submit">
             {action} Employee
           </Button>
         </Modal.Footer>

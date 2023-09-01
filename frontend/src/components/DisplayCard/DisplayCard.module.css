@@ -23,3 +23,14 @@
   cursor: pointer;
   color: red;
 }
+
+.button {
+  float: right;
+  border: rgb(125, 179, 161);
+  background-color: rgb(125, 179, 161);
+}
+
+.button:hover {
+  border: rgb(158, 224, 202);
+  background-color: rgb(158, 224, 202);
+}
