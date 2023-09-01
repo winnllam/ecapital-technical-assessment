@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import displayCardStyles from "./DisplayCard.module.css";
 import * as employeeService from "../../services/api.js";
+import CreateModal from "../CreateModal/CreateModal";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchEmployeeData = () => {
     employeeService.getAllEmployees().then((res) => {
@@ -67,6 +70,10 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
+        <Button variant="primary" onClick={() => setShowModal(true)}>
+          Add Employee
+        </Button>
+        <CreateModal show={showModal} close={() => setShowModal(false)} />
       </Container>
     </div>
   );
