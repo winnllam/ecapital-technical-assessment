@@ -35,7 +35,9 @@ app.get("/api/employees", async (req, res, next) => {
 app.post("/api/employees", async (req, res, next) => {
   if (
     typeof req.body.firstName != "string" ||
+    req.body.firstName.length == 0 ||
     typeof req.body.lastName != "string" ||
+    req.body.lastName.length == 0 ||
     typeof req.body.salary != "number"
   ) {
     return res.status(422).json({
