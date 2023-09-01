@@ -1,5 +1,19 @@
 # Take-home Assignment (Full Stack)
 
+## Installation & Running
+
+```
+cd frontend
+npm install
+npm start
+
+cd backend
+npm install
+node server.js
+```
+
+React runs on `localhost:3000`, Express server runs on `localhost:5000`
+
 ### Goal:
 
 - Create an Employee Table like the one in the image below.
