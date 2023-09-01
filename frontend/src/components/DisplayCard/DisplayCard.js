@@ -138,6 +138,7 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
+        {employees.length === 0 && <p>No employees to show!</p>}
         <hr></hr>
         <Button
           className={displayCardStyles.button}
