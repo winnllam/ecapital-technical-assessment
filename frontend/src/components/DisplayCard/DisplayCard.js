@@ -135,6 +135,7 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
+        <hr></hr>
         <Button
           className={displayCardStyles.button}
           onClick={() => setShowCreateModal(true)}

@@ -38,6 +38,7 @@
   float: right;
   border: rgb(125, 179, 161);
   background-color: rgb(125, 179, 161);
+  padding: 10px 20px;
 }
 
 .button:hover {
