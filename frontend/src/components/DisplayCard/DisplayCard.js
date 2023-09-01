@@ -9,7 +9,7 @@ import FormModal from "../FormModal/FormModal";
 
 const DisplayCard = () => {
   const [employees, setEmployees] = useState([]);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const fetchEmployeeData = () => {
     employeeService.getAllEmployees().then((res) => {
@@ -70,12 +70,12 @@ const DisplayCard = () => {
             ))}
           </div>
         )}
-        <Button variant="primary" onClick={() => setShowEditModal(true)}>
+        <Button variant="primary" onClick={() => setShowCreateModal(true)}>
           Add Employee
         </Button>
         <FormModal
-          show={showEditModal}
-          close={() => setShowEditModal(false)}
+          show={showCreateModal}
+          close={() => setShowCreateModal(false)}
           firstName=""
           lastName=""
           salary=""
