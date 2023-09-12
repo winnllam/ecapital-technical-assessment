@@ -14,6 +14,7 @@ const DisplayCard = () => {
   const [editingEmp, setEditingEmp] = useState(null);
 
   const [id, setId] = useState(0);
+  const [title, setTitle] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [salary, setSalary] = useState("");
@@ -34,7 +35,7 @@ const DisplayCard = () => {
     e.preventDefault();
     let salaryParse = parseInt(salary);
     employeeService
-      .addEmployee(firstName, lastName, salaryParse)
+      .addEmployee(title, firstName, lastName, salaryParse)
       .then(() => {
         resetInput();
         setShowCreateModal(false);
@@ -47,7 +48,7 @@ const DisplayCard = () => {
     e.preventDefault();
     let salaryParse = parseInt(salary);
     employeeService
-      .updateEmployee(id, firstName, lastName, salaryParse)
+      .updateEmployee(id, title, firstName, lastName, salaryParse)
       .then(() => {
         resetInput();
         setShowEditModal(false);
@@ -74,6 +75,7 @@ const DisplayCard = () => {
   const resetInput = () => {
     setEditingEmp(null);
     setId(0);
+    setTitle("");
     setFirstName("");
     setLastName("");
     setSalary("");
@@ -84,6 +86,7 @@ const DisplayCard = () => {
 
     if (editingEmp) {
       setId(editingEmp.id);
+      setTitle(editingEmp.title);
       setFirstName(editingEmp.firstName);
       setLastName(editingEmp.lastName);
       setSalary(editingEmp.salary);
@@ -95,6 +98,9 @@ const DisplayCard = () => {
       <Container>
         <h3 className={displayCardStyles.header}>Employees</h3>
         <Row>
+          <Col>
+            <b>Title</b>
+          </Col>
           <Col>
             <b>First Name</b>
           </Col>
@@ -111,6 +117,7 @@ const DisplayCard = () => {
           <div className={displayCardStyles.employeeList}>
             {employees.map((employee) => (
               <Row key={employee.id}>
+                <Col>{employee.title}</Col>
                 <Col>{employee.firstName}</Col>
                 <Col>{employee.lastName}</Col>
                 <Col>{currencyFormat(employee.salary)}</Col>
@@ -152,6 +159,8 @@ const DisplayCard = () => {
           close={() => closeModal()}
           action="Add"
           handleSubmit={createEmployee}
+          title={title}
+          setTitle={setTitle}
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}
@@ -165,6 +174,8 @@ const DisplayCard = () => {
           close={() => closeModal()}
           action="Edit"
           handleSubmit={updateEmployee}
+          title={title}
+          setTitle={setTitle}
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}

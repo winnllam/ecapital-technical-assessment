@@ -20,6 +20,7 @@ try {
   if (!isDatabaseExists) {
     jsonData.employees.forEach((row) => {
       Employee.create({
+        title: "",
         firstName: row.firstName,
         lastName: row.lastName,
         salary: row.salary,
@@ -55,6 +56,8 @@ app.get("/api/employees", async (req, res, next) => {
 
 app.post("/api/employees", async (req, res, next) => {
   if (
+    typeof req.body.title != "string" ||
+    req.body.title.length == 0 ||
     typeof req.body.firstName != "string" ||
     req.body.firstName.length == 0 ||
     typeof req.body.lastName != "string" ||
@@ -68,6 +71,7 @@ app.post("/api/employees", async (req, res, next) => {
   }
 
   const employee = await Employee.create({
+    title: req.body.title,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     salary: req.body.salary,
@@ -78,13 +82,15 @@ app.post("/api/employees", async (req, res, next) => {
 
 app.patch("/api/employees/:id", async (req, res, next) => {
   const employee = await Employee.findByPk(req.params.id);
-  if (employee === null) {
+  if (!employee) {
     return res
       .status(404)
       .json({ error: "employee id:" + req.params.id + " does not exists" });
   }
 
   if (
+    typeof req.body.title != "string" ||
+    req.body.title.length == 0 ||
     typeof req.body.firstName != "string" ||
     req.body.firstName.length == 0 ||
     typeof req.body.lastName != "string" ||
@@ -97,6 +103,7 @@ app.patch("/api/employees/:id", async (req, res, next) => {
     });
   }
 
+  employee.title = req.body.title;
   employee.firstName = req.body.firstName;
   employee.lastName = req.body.lastName;
   employee.salary = req.body.salary;

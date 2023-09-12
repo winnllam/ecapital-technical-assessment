@@ -8,6 +8,8 @@ const FormModal = ({
   close,
   action,
   handleSubmit,
+  title,
+  setTitle,
   firstName,
   setFirstName,
   lastName,
@@ -22,6 +24,16 @@ const FormModal = ({
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
+          <Form.Group>
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="ex. Developer"
+            />
+          </Form.Group>
           <Form.Group>
             <Form.Label>First Name</Form.Label>
             <Form.Control
